@@ -8,7 +8,6 @@ from utils.config import *
 
 @pytest.fixture(scope="function")
 def setup(request, browser=None, environment=None):
-    """Setup and teardown for WebDriver with default browser and environment."""
     
     # Set default browser if not provided
     if browser is None:

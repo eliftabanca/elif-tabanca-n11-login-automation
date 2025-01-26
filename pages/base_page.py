@@ -13,12 +13,12 @@ class BasePage:
     def open_url(self, url):
         self.driver.get(url)
 
+#Waits for an element to be present and returns it.
     def find_element(self, locator):
-        """#Waits for an element to be present and returns it."""
         return self.wait.until(EC.presence_of_element_located(locator))
 
+#Waits for elements to be present and returns them
     def find_elements(self, locator):
-        """Waits for elements to be present and returns them."""
         return self.wait.until(EC.presence_of_all_elements_located(locator))
 
     def click_element(self, locator):
@@ -27,17 +27,17 @@ class BasePage:
         element.click()
 
     def enter_text(self, locator, text):
-        """Waits for an element to be present and enters the specified text."""
+#Waits for an element to be present and enters the specified text
         element = self.find_element(locator)
         element.clear()
         element.send_keys(text)
 
+#Waits for an element to be present and returns its text
     def get_text(self, locator):
-        """Waits for an element to be present and returns its text."""
         return self.find_element(locator).text
 
     def is_element_visible(self, locator):
-        """Checks if an element is visible on the page."""
+ #Checks if an element is visible on the page.
         try:
             self.wait.until(EC.visibility_of_element_located(locator))
             return True
@@ -45,7 +45,6 @@ class BasePage:
             return False
 
     def is_element_present(self, locator):
-        """Checks if an element is present in the DOM."""
         try:
             self.find_element(locator)
             return True
@@ -53,12 +52,11 @@ class BasePage:
             return False
 
     def wait_for_element_disappear(self, locator):
-        """Waits for an element to disappear."""
         self.wait.until(EC.invisibility_of_element_located(locator))
 
+ # Create screenshots directory if it doesn't exist
     def take_screenshot(self, filename="screenshot"):
-        """Takes a screenshot and saves it to the 'screenshots' directory."""
-        # Create screenshots directory if it doesn't exist
+        
         if not os.path.exists("screenshots"):
             os.makedirs("screenshots")
         

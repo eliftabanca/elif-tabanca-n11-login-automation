@@ -6,7 +6,6 @@ from tests.conftest import *
 class LoginPage(BasePage):
    
 
-    # Actions
     def enter_email(self, email):
         self.enter_text(self.EMAIL_INPUT, email)
 
