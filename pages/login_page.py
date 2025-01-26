@@ -40,9 +40,6 @@ class LoginPage(BasePage):
     def get_password_error_message(self):
          password_error_element = self.wait_element_visibility(ERROR_MESSAGE_EMPTY_PASSWORD_LOCATOR)
          return password_error_element.text
-
-
-
-    def clear_fields(self):
-        self.enter_text(self.EMAIL_INPUT, "")
-        self.enter_text(self.PASSWORD_INPUT, "")
+    
+   
+   

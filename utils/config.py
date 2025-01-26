@@ -8,16 +8,11 @@ VALID_USER_PASSWORD = "Password123"
 INVALID_USER_EMAIL = "invaliduser@gmail.com"  
 INVALID_USER_PASSWORD = "Wrong123"  
 
-# Facebook user credentials 
-FACEBOOK_USER_EMAIL = "validusertest01@gmail.com"  
-FACEBOOK_USER_PASSWORD = "validuser123"  
-
 
 # Invalid password scenarios based on Boundary Value Analysis (BVA)
 SHORT_PASSWORD = "12345"  #Password with less than 6 characters (boundary value analysis)
 LONG_PASSWORD = "TooLongPassword1"  #Password with more than 15 characters (boundary value analysis)
 
-EMPTY_STRING = ""  
 
  #Locators
 EMAIL_INPUT = (By.ID, "email")
@@ -40,5 +35,4 @@ ERROR_MESSAGE_LONG_PASSWORD = "Girilen değer en fazla 15 karakter olmalıdır."
 LOGO_LOCATOR = (By.CLASS_NAME, "user")
 LOGO_TITLE_TEXT = "V"
 
-FACEBOOK_LOCATOR = (By.CLASS_NAME, "facebookBtn")
 
