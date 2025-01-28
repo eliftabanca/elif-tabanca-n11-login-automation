@@ -4,7 +4,7 @@ from utils.config import HTTP_URL
 @pytest.mark.usefixtures("setup")
 class TestSecurity:
 
-    def test_SEC_TC06_https_redirection(self):
+    def test_https_redirection(self):
       
         self.driver.get(HTTP_URL) #!Opening a URL in 'http' format.
         

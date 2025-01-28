@@ -4,6 +4,7 @@ from utils.config import *
 from pages.base_page import *
 
 class LoginPage(BasePage):
+
     def __init__(self,driver):
         super().__init__(driver)
         self.driver = driver
@@ -11,6 +12,22 @@ class LoginPage(BasePage):
         self.password_field = PASSWORD_INPUT
         self.login_button = LOGIN_BUTTON_LOCATOR
     
+    def valid_login(self):
+        self.wait_element_visibility(EMAIL_INPUT).click
+        self.wait_element_visibility(EMAIL_INPUT).send_keys(VALID_USER_EMAIL)
+        self.wait_element_visibility(PASSWORD_INPUT).send_keys(VALID_USER_PASSWORD)
+        self.wait_element_clickable(LOGIN_BUTTON_LOCATOR).click()
+
+    def invalid_username_login(self):
+        self.wait_element_visibility(EMAIL_INPUT).send_keys(INVALID_USER_EMAIL)
+        self.wait_element_visibility(PASSWORD_INPUT).send_keys(VALID_USER_PASSWORD)
+        self.wait_element_clickable(LOGIN_BUTTON_LOCATOR).click()
+    
+    def valid_username_invalid_password(self):
+        self.wait_element_visibility(EMAIL_INPUT).send_keys(VALID_USER_EMAIL)
+        self.wait_element_visibility(PASSWORD_INPUT).send_keys(INVALID_USER_PASSWORD)
+        self.wait_element_clickable(LOGIN_BUTTON_LOCATOR).click()
+       
     def enter_email(self, data):
         user_name = self.wait_element_visibility(EMAIL_INPUT)
         user_name.clear()
@@ -23,6 +40,9 @@ class LoginPage(BasePage):
     
     def click_loginButton(self):
         self.wait_element_clickable(LOGIN_BUTTON_LOCATOR).click()
+    
+    def scroll_down(self):
+        self.driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")
 
     def logo_title_find(self):
         logo_title = self.wait_element_visibility(LOGO_LOCATOR)
@@ -39,7 +59,6 @@ class LoginPage(BasePage):
     def get_password_error_message(self):
          password_error_element = self.wait_element_visibility(ERROR_MESSAGE_EMPTY_PASSWORD_LOCATOR)
          return password_error_element.text
-    
 
     def is_email_field_visible(self):
         return self.wait_element_visibility(EMAIL_INPUT).is_displayed()

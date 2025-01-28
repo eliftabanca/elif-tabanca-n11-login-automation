@@ -1,6 +1,7 @@
 import time
 import pytest
 import softest
+from pages.login_page import LoginPage
 from utils.config import *
 
 
@@ -8,25 +9,22 @@ from utils.config import *
 class TestLogin(softest.TestCase):
 
     def test_valid_login(self):
-        self.login_page.enter_email(VALID_USER_EMAIL) 
-        self.login_page.enter_password(VALID_USER_PASSWORD)
-        self.login_page.click_loginButton()
+        valid_login_object = LoginPage(self.driver)
+        valid_login_object.valid_login()
         actual_value = self.login_page.logo_title_find()
         self.soft_assert(self.assertEqual, LOGO_TITLE_TEXT, actual_value, "The title does not match the expected value.")
         self.assert_all()
 
     def test_invalid_username(self):
-        self.login_page.enter_email(INVALID_USER_EMAIL)  
-        self.login_page.enter_password(VALID_USER_PASSWORD) 
-        self.login_page.click_loginButton()  
+        invalid_username_login_object = LoginPage(self.driver)
+        invalid_username_login_object.invalid_username_login()
         actual_message = self.login_page.get_error_message()
         self.soft_assert(self.assertEqual, ERROR_MESSAGE_INVALID_CREDENTIALS, actual_message, "Error message is not as expected.")
         self.assert_all()
 
     def test_invalid_password(self):
-        self.login_page.enter_email(VALID_USER_EMAIL)
-        self.login_page.enter_password(INVALID_USER_PASSWORD)  
-        self.login_page.click_loginButton()  
+        invalid_password_onject = LoginPage(self.driver)
+        invalid_password_onject.valid_username_invalid_password()
         actual_message = self.login_page.get_error_message()  
         self.soft_assert(self.assertEqual, ERROR_MESSAGE_INVALID_CREDENTIALS, actual_message, "Error message is not as expected.")
         self.assert_all()
@@ -59,7 +57,8 @@ class TestLogin(softest.TestCase):
     def test_short_password(self):
         self.login_page.enter_email(VALID_USER_EMAIL)  
         self.login_page.enter_password(SHORT_PASSWORD) # Password with less than 6 characters (boundary value analysis)
-        self.login_page.click_loginButton()  
+        self.login_page.click_loginButton()
+        self.scroll_down()  
         password_error = self.login_page.get_password_error_message()
         
         self.soft_assert(self.assertEqual, ERROR_MESSAGE_SHORT_PASSWORD, password_error, "Password error message is not as expected.")
