@@ -1,0 +1,7 @@
+pytest==8.1.1
+selenium==4.18.1
+webdriver-manager==4.0.2
+pytest-html==4.1.1
+softest==1.2.0.0
+requests==2.31.0
+python-dotenv==1.0.1
