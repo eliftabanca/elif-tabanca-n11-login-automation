@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 BASE_URL = "https://www.n11.com/giris-yap" 
-
+HTTP_URL = "http://www.n11.com/giris-yap"   
 # Test user credentials
 VALID_USER_EMAIL = "validusertest01@gmail.com" 
 VALID_USER_PASSWORD = "Password123"  
