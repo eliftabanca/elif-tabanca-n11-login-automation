@@ -5,12 +5,13 @@ import os
 from datetime import datetime
 from selenium.webdriver.support import expected_conditions as EC
 
+from utils.config import *
 
 class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 10)  # Default timeout of 10 seconds
+        self.wait = WebDriverWait(driver, 10)  
 
     def open_url(self, url):
         self.driver.get(url)
@@ -53,6 +54,25 @@ class BasePage:
 
     def get_title(self):
         return self.driver.title
+    
+    def accept_cookies(self):
+        try:
+            accept_button = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(COOKIE_ACCEPT_BUTTON)
+            )
+            accept_button.click()
+     
+        except Exception as e:
+            print(f"Failed to accept cookies or notifications: {e}")
+
+    def accept_notifications(self):
+        try:
+            accept_button = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(NOTIFICATION_ACCEPT_BUTTON)
+            )
+            accept_button.click()
+        except Exception as e:
+            print(f"Failed to accept cookies or notifications: {e}")
     
     def get_URL(self):
         return self.driver.current_url

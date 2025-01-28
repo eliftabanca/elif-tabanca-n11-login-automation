@@ -8,20 +8,20 @@ class LoginPage(BasePage):
     def __init__(self,driver):
         super().__init__(driver)
         self.driver = driver
-   
+        self.email_field = EMAIL_INPUT
+        self.password_field = PASSWORD_INPUT
+        self.login_button = LOGIN_BUTTON_LOCATOR
     
     def enter_email(self, data):
         user_name = self.wait_element_visibility(EMAIL_INPUT)
         user_name.clear()
         user_name.send_keys(data)
-
     
     def enter_password(self, data):
         user_password = self.wait_element_visibility(PASSWORD_INPUT)
         user_password.clear()
         user_password.send_keys(data)
     
-
     def click_loginButton(self):
         self.wait_element_clickable(LOGIN_BUTTON_LOCATOR).click()
 
@@ -40,6 +40,16 @@ class LoginPage(BasePage):
     def get_password_error_message(self):
          password_error_element = self.wait_element_visibility(ERROR_MESSAGE_EMPTY_PASSWORD_LOCATOR)
          return password_error_element.text
+    
+
+    def is_email_field_visible(self):
+        return self.wait_element_visibility(EMAIL_INPUT).is_displayed()
+
+    def is_password_field_visible(self):
+        return self.wait_element_visibility(PASSWORD_INPUT).is_displayed()
+
+    def is_login_button_visible(self):
+        return self.wait_element_visibility(LOGIN_BUTTON_LOCATOR).is_displayed()
     
    
    

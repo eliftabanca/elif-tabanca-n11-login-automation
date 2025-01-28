@@ -1,11 +1,12 @@
+import time
 import pytest
 import softest
-from pages.login_page import LoginPage
 from utils.config import *
 
 
 @pytest.mark.usefixtures("setup")
 class TestLogin(softest.TestCase):
+    
 
     def test_valid_login(self):
         self.login_page.enter_email(VALID_USER_EMAIL) 

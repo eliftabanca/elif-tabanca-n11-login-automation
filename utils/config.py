@@ -23,6 +23,8 @@ ERROR_MESSAGE_EMPTY_EMAIL_LOCATOR = (By.CSS_SELECTOR, "#loginForm > div.form-inp
 ERROR_MESSAGE_EMPTY_PASSWORD_LOCATOR = (By.CSS_SELECTOR, "#loginForm > div.form-inputs > div:nth-child(2) > div.errorMessage > div")
 ERROR_MESSAGE_SHORT_PASSWORD_LOCATOR = (By.CSS_SELECTOR, "#loginForm > div.form-inputs > div:nth-child(2) > div.errorMessage > div")
 ERROR_MESSAGE_LONG_PASSWORD_LOCATOR = (By.CSS_SELECTOR, "#loginForm > div.form-inputs > div:nth-child(2) > div.errorMessage > div")
+NOTIFICATION_ACCEPT_BUTTON = (By.CLASS_NAME, "dn-slide-accept-btn")
+COOKIE_ACCEPT_BUTTON =   (By.CLASS_NAME, "px-16px py-8px cursor-pointer rounded-4px bg-[#5D3EBC] text-center font-600 text-white")
 
 #Error messages
 ERROR_MESSAGE_INVALID_CREDENTIALS = "E-posta adresi veya şifre hatalı, kontrol edebilir misin?" 
