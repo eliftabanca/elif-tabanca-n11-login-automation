@@ -22,7 +22,8 @@ The tests are prepared manually and executed with Selenium-based automation code
 ## Manual Tests
 - Manual test scenarios have been prepared.
 - **All Manual Test Scenarios**:[Elif Busra Tabanca-N11 Login-related Manuel Tests - Sayfa1.pdf](https://github.com/user-attachments/files/18579427/Elif.Busra.Tabanca-N11.Login-related.Manuel.Tests.-.Sayfa1.pdf)
- View the PDF of Manual Tests
+ View the PDF of Manual Tests or check on Google Drive
+Manuel Test Google Drive Linki: https://docs.google.com/spreadsheets/d/1XvPSeeHRtkCKxgq9b5TXO-aOBx-Oo80NAQuHJ9oo1rc/edit?usp=sharing
   
 
 ---
