@@ -33,13 +33,10 @@ def setup(request, browser="chrome", environment="prod"):
     request.cls.login_page = LoginPage(driver)
 
     yield
-
-    # Her testten sonra ekran görüntüsü alma
     test_name = request.node.name
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     screenshots_dir = "screenshots"
 
-    # Ekran görüntüsü için klasör oluştur
     if not os.path.exists(screenshots_dir):
         os.makedirs(screenshots_dir)
 
