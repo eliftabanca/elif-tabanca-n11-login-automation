@@ -4,7 +4,6 @@ This project includes both manual and automation tests for the N11.com Login Sys
 
 ---
 
-## Features
 
 ### The project tests the following scenarios on the N11 login screen:
 - Successful login verification  
@@ -16,12 +15,16 @@ This project includes both manual and automation tests for the N11.com Login Sys
 - Login validation at the API level  
 
 The tests are prepared manually and executed with Selenium-based automation codes. Additionally, HTML reports are generated using `pytest-html`.
+<img width="1433" alt="html rapor" src="https://github.com/user-attachments/assets/36c83922-7e00-4214-9662-86449cdb88dc" />
 
 ---
 
 ## Manual Tests
 - Manual test scenarios have been prepared.
-- **All Manual Test Scenarios**: View the PDF of Manual Tests
+- **All Manual Test Scenarios**:[Elif Busra Tabanca-N11 Login-related Manuel Tests - Sayfa1.pdf](https://github.com/user-attachments/files/18579427/Elif.Busra.Tabanca-N11.Login-related.Manuel.Tests.-.Sayfa1.pdf)
+ View the PDF of Manual Tests or check on Google Drive
+Manuel Test Google Drive Linki: https://docs.google.com/spreadsheets/d/1XvPSeeHRtkCKxgq9b5TXO-aOBx-Oo80NAQuHJ9oo1rc/edit?usp=sharing
+  
 
 ---
 
