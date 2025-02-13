@@ -14,8 +14,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4  # En güncel sürüm!
-
+        uses: actions/checkout@v4  #The latest version v4
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -41,7 +40,7 @@ jobs:
 
       - name: Save Test Reports
         if: always()
-        uses: actions/upload-artifact@v4  # 🔥 `v3` yerine `v4` kullanıyoruz!
+        uses: actions/upload-artifact@v4  
         with:
           name: selenium-test-report
           path: report.html
