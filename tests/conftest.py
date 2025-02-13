@@ -13,12 +13,12 @@ from utils.config import *
 def setup(request, browser="chrome", environment="prod"):
     if browser == "chrome":
         chrome_options = Options()
-        chrome_options.add_argument("--no-sandbox")  # CI/CD'de güvenli çalıştırma
-        chrome_options.add_argument("--disable-dev-shm-usage")  # Bellek sorunlarını önler
-        chrome_options.add_argument("--headless")  # CI/CD için headless mod
-        chrome_options.add_argument("--disable-gpu")  # GPU kullanımını kapat
-        chrome_options.add_argument("--remote-debugging-port=9222")  # Çakışmayı önler
-        chrome_options.add_argument("--user-data-dir=/tmp/chrome-user-data")  # Kullanıcı verisi çakışmasını önler
+        chrome_options.add_argument("--no-sandbox")  
+        chrome_options.add_argument("--disable-dev-shm-usage")  
+        chrome_options.add_argument("--headless")  #CI/CD headless mod
+        chrome_options.add_argument("--disable-gpu")  
+        chrome_options.add_argument("--remote-debugging-port=9222")  
+        chrome_options.add_argument("--user-data-dir=/tmp/chrome-user-data") 
 
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
     else:
