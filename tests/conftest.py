@@ -8,6 +8,8 @@ from pages.base_page import BasePage
 from datetime import datetime
 import os
 from utils.config import *
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 @pytest.fixture(scope="function")
 def setup(request, browser="chrome", environment="prod"):
@@ -15,12 +17,16 @@ def setup(request, browser="chrome", environment="prod"):
         chrome_options = Options()
         chrome_options.add_argument("--no-sandbox")  
         chrome_options.add_argument("--disable-dev-shm-usage")  
-        chrome_options.add_argument("--headless")  #CI/CD headless mod
+        chrome_options.add_argument("--headless") 
         chrome_options.add_argument("--disable-gpu")  
         chrome_options.add_argument("--remote-debugging-port=9222")  
         chrome_options.add_argument("--user-data-dir=/tmp/chrome-user-data") 
 
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+        try:
+            driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+        except Exception as e:
+            print(f"WebDriver failed to initialize: {e}")
+            pytest.fail(f"WebDriver Error: {e}")
     else:
         raise ValueError("Invalid browser! Supported browser: chrome")
 
@@ -28,14 +34,22 @@ def setup(request, browser="chrome", environment="prod"):
     base_url = base_urls.get(environment, BASE_URL)
 
     driver.get(base_url)
-    driver.maximize_window()
+    driver.implicitly_wait(20)  
 
-    base_page = BasePage(driver)
     try:
+        WebDriverWait(driver, 30).until(
+            EC.presence_of_element_located(("id", "login-button")) 
+        )
+    except Exception as e:
+        print(f"Page did not load correctly: {e}")
+
+    try:
+        base_page = BasePage(driver)
         base_page.accept_cookies()
         base_page.accept_notifications()
     except Exception as e:
-        print(f": {e}")
+        print(f"BasePage initialization failed: {e}")
+
 
     request.cls.driver = driver
     request.cls.base_page = base_page
