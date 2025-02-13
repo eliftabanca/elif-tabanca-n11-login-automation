@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 from pages.login_page import LoginPage
 from pages.base_page import BasePage
 from datetime import datetime
@@ -11,7 +12,15 @@ from utils.config import *
 @pytest.fixture(scope="function")
 def setup(request, browser="chrome", environment="prod"):
     if browser == "chrome":
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        chrome_options = Options()
+        chrome_options.add_argument("--no-sandbox")  # CI/CD'de güvenli çalıştırma
+        chrome_options.add_argument("--disable-dev-shm-usage")  # Bellek sorunlarını önler
+        chrome_options.add_argument("--headless")  # CI/CD için headless mod
+        chrome_options.add_argument("--disable-gpu")  # GPU kullanımını kapat
+        chrome_options.add_argument("--remote-debugging-port=9222")  # Çakışmayı önler
+        chrome_options.add_argument("--user-data-dir=/tmp/chrome-user-data")  # Kullanıcı verisi çakışmasını önler
+
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
     else:
         raise ValueError("Invalid browser! Supported browser: chrome")
 
@@ -42,6 +51,6 @@ def setup(request, browser="chrome", environment="prod"):
 
     screenshot_path = os.path.join(screenshots_dir, f"{test_name}_{timestamp}.png")
     driver.save_screenshot(screenshot_path)
-    print(f"Scrrenshot added: {screenshot_path}")
+    print(f"Screenshot added: {screenshot_path}")
 
     driver.quit()
