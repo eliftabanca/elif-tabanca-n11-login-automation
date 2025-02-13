@@ -14,7 +14,8 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4  #The latest version v4
+        uses: actions/checkout@v4  
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -34,6 +35,9 @@ jobs:
           sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
           chromedriver --version
+
+      - name: Set Python Path  
+        run: echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
 
       - name: Run Selenium Tests
         run: pytest --maxfail=5 --disable-warnings --html=report.html
