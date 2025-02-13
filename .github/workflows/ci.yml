@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4  
+        uses: actions/checkout@v4  # The latest version v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -36,10 +36,9 @@ jobs:
           sudo chmod +x /usr/local/bin/chromedriver
           chromedriver --version
 
-      - name: Set Python Path  
-        run: echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
-
       - name: Run Selenium Tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}  # PYTHONPATH ayarı eklendi
         run: pytest --maxfail=5 --disable-warnings --html=report.html
 
       - name: Save Test Reports
