@@ -7,9 +7,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from datetime import datetime
 from pages.login_page import LoginPage
 from pages.base_page import BasePage
-from datetime import datetime
 from utils.config import BASE_URL
 
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
@@ -17,11 +18,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 @pytest.fixture(scope="function")
 def setup(request, browser="chrome", environment="prod", headless=None):
-  
-    
-   
     if headless is None:
-        headless = sys.platform.startswith("linux")  #Enable headless mode on GitHub Actions
+        headless = sys.platform.startswith("linux")  #Headless mode 
 
     if browser == "chrome":
         chrome_options = Options()
@@ -33,7 +31,7 @@ def setup(request, browser="chrome", environment="prod", headless=None):
         chrome_options.add_argument("--disable-dev-shm-usage")  
         chrome_options.add_argument("--disable-gpu")  
         chrome_options.add_argument("--remote-debugging-port=9222")  
-        chrome_options.add_argument("--user-data-dir=/tmp/chrome-user-data") 
+        chrome_options.add_argument("--user-data-dir=/tmp/chrome-user-data")  # Kullanıcı verilerini saklamak için
 
         try:
             driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
@@ -41,7 +39,7 @@ def setup(request, browser="chrome", environment="prod", headless=None):
             print(f" WebDriver failed to initialize: {e}")
             pytest.fail(f"WebDriver Error: {e}")
     else:
-        raise ValueError("⚠️ Invalid browser! Only 'chrome' is supported.")
+        raise ValueError("Invalid browser! Only 'chrome' is supported.")
 
     base_urls = {"prod": BASE_URL}
     base_url = base_urls.get(environment, BASE_URL)
@@ -49,9 +47,10 @@ def setup(request, browser="chrome", environment="prod", headless=None):
     driver.get(base_url)
     driver.implicitly_wait(20)  
 
+   
     try:
         WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(("id", "login-button")) 
+            EC.presence_of_element_located((By.ID, "login-button"))  # Öğeyi sayfada bekle
         )
     except Exception as e:
         print(f"Page did not load properly: {e}")
@@ -77,6 +76,6 @@ def setup(request, browser="chrome", environment="prod", headless=None):
 
     screenshot_path = os.path.join(screenshots_dir, f"{test_name}_{timestamp}.png")
     driver.save_screenshot(screenshot_path)
-    print(f" Screenshot saved: {screenshot_path}")
+    print(f" 📸 Screenshot saved: {screenshot_path}")
 
     driver.quit()
