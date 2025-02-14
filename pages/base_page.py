@@ -10,7 +10,7 @@ class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 30)  
+        self.wait = WebDriverWait(driver, 10)  
 
     def open_url(self, url):
         self.driver.get(url)
@@ -42,11 +42,11 @@ class BasePage:
         if not os.path.exists("screenshots"):
             os.makedirs("screenshots")
         
-        # Generate a timestamped filename
+    
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         file_path = os.path.join("screenshots", f"{filename}_{timestamp}.png")
 
-        # Save the screenshot
+
         self.driver.save_screenshot(file_path)
         print(f"Screenshot saved to {file_path}")
         return file_path
@@ -56,7 +56,7 @@ class BasePage:
     
     def accept_cookies(self):
         try:
-            accept_button = WebDriverWait(self.driver, 20).until(
+            accept_button = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable(COOKIE_ACCEPT_BUTTON)
             )
             accept_button.click()
@@ -66,7 +66,7 @@ class BasePage:
 
     def accept_notifications(self):
         try:
-            accept_button = WebDriverWait(self.driver, 20).until(
+            accept_button = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable(NOTIFICATION_ACCEPT_BUTTON)
             )
             accept_button.click()

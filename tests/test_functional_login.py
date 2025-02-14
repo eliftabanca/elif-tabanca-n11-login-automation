@@ -23,8 +23,8 @@ class TestLogin(softest.TestCase):
         self.assert_all()
 
     def test_invalid_password(self):
-        invalid_password_onject = LoginPage(self.driver)
-        invalid_password_onject.valid_username_invalid_password()
+        invalid_password_object = LoginPage(self.driver)
+        invalid_password_object.valid_username_invalid_password()
         actual_message = self.login_page.get_error_message()  
         self.soft_assert(self.assertEqual, ERROR_MESSAGE_INVALID_CREDENTIALS, actual_message, "Error message is not as expected.")
         self.assert_all()
@@ -57,8 +57,7 @@ class TestLogin(softest.TestCase):
     def test_short_password(self):
         self.login_page.enter_email(VALID_USER_EMAIL)  
         self.login_page.enter_password(SHORT_PASSWORD) # Password with less than 6 characters (boundary value analysis)
-        self.login_page.click_loginButton()
-        self.scroll_down()  
+        self.login_page.click_loginButton() 
         password_error = self.login_page.get_password_error_message()
         
         self.soft_assert(self.assertEqual, ERROR_MESSAGE_SHORT_PASSWORD, password_error, "Password error message is not as expected.")

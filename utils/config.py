@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 BASE_URL = "https://www.n11.com/giris-yap" 
 HTTP_URL = "http://www.n11.com/giris-yap"   
 # Test user credentials
-VALID_USER_EMAIL = "validusertest01@gmail.com" 
-VALID_USER_PASSWORD = "Password123"  
+VALID_USER_EMAIL = "t8778925@gmail.com" #"validusertest01@gmail.com" this email was banned by n11.com
+VALID_USER_PASSWORD = "test123" #"Password123" this password was banned by n11.com
 INVALID_USER_EMAIL = "invaliduser@gmail.com"  
 INVALID_USER_PASSWORD = "Wrong123"  
 
@@ -35,6 +35,6 @@ ERROR_MESSAGE_LONG_PASSWORD = "Girilen değer en fazla 15 karakter olmalıdır."
 
 #Asserations
 LOGO_LOCATOR = (By.CLASS_NAME, "user")
-LOGO_TITLE_TEXT = "V"
+LOGO_TITLE_TEXT = "t"
 
 
