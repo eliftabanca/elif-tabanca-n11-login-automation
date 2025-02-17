@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4  # The latest version v4
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -31,8 +31,15 @@ jobs:
           sudo apt update
           sudo apt install -y google-chrome-stable
 
+      - name: Create Reports Directory
+        run: mkdir -p reports
+
       - name: Run Selenium Tests
         run: pytest --maxfail=5 --disable-warnings --html=reports/report.html --headless
+
+      - name: Debug pytest logs
+        if: failure()
+        run: cat reports/report.html || echo "Test report not found"
 
       - name: Save Test Reports
         if: always()
