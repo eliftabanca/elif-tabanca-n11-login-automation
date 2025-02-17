@@ -56,7 +56,7 @@ class BasePage:
     
     def accept_cookies(self):
         try:
-            accept_button = WebDriverWait(self.driver, 10).until(
+            accept_button = WebDriverWait(self.driver, 15).until(
                 EC.element_to_be_clickable(COOKIE_ACCEPT_BUTTON)
             )
             accept_button.click()
@@ -66,7 +66,7 @@ class BasePage:
 
     def accept_notifications(self):
         try:
-            accept_button = WebDriverWait(self.driver, 10).until(
+            accept_button = WebDriverWait(self.driver, 15).until(
                 EC.element_to_be_clickable(NOTIFICATION_ACCEPT_BUTTON)
             )
             accept_button.click()

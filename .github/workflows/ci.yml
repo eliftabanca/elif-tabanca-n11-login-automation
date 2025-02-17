@@ -38,7 +38,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4  
         with:
-          name: selenium-test-report
+          name: selenium-test-report 
           path: report.html
 
       - name: Save Screenshots (if any)
