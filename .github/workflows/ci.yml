@@ -31,22 +31,15 @@ jobs:
           sudo apt update
           sudo apt install -y google-chrome-stable
 
-      - name: Create Reports Directory
-        run: mkdir -p reports
-
       - name: Run Selenium Tests
-        run: pytest --maxfail=5 --disable-warnings --html=reports/report.html --headless
-
-      - name: Debug pytest logs
-        if: failure()
-        run: cat reports/report.html || echo "Test report not found"
+        run: pytest --maxfail=5 --disable-warnings --html=report.html --headless
 
       - name: Save Test Reports
         if: always()
         uses: actions/upload-artifact@v4  
         with:
           name: selenium-test-report
-          path: reports/
+          path: report.html
 
       - name: Save Screenshots (if any)
         if: always()
