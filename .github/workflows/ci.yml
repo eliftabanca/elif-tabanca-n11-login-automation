@@ -26,24 +26,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Set up Chrome & Chromedriver
+      - name: Install Chrome
         run: |
           sudo apt update
-          sudo apt install -y wget unzip
           sudo apt install -y google-chrome-stable
-          wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
-          sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
-          chromedriver --version
 
       - name: Run Selenium Tests
-        env:
-          PYTHONPATH: ${{ github.workspace }}  # PYTHONPATH ayarı eklendi
-        run: pytest --maxfail=5 --disable-warnings --html=report.html
+        run: pytest --maxfail=5 --disable-warnings --html=reports/report.html --headless
 
       - name: Save Test Reports
         if: always()
         uses: actions/upload-artifact@v4  
         with:
           name: selenium-test-report
-          path: report.html
+          path: reports/
+
+      - name: Save Screenshots (if any)
+        if: always()
+        uses: actions/upload-artifact@v4  
+        with:
+          name: selenium-screenshots
+          path: screenshots/
