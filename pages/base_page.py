@@ -54,24 +54,6 @@ class BasePage:
     def get_title(self):
         return self.driver.title
     
-    def accept_cookies(self):
-        try:
-            accept_button = WebDriverWait(self.driver, 15).until(
-                EC.element_to_be_clickable(COOKIE_ACCEPT_BUTTON)
-            )
-            accept_button.click()
-     
-        except Exception as e:
-            print(f"Failed to accept cookies or notifications: {e}")
-
-    def accept_notifications(self):
-        try:
-            accept_button = WebDriverWait(self.driver, 15).until(
-                EC.element_to_be_clickable(NOTIFICATION_ACCEPT_BUTTON)
-            )
-            accept_button.click()
-        except Exception as e:
-            print(f"Failed to accept cookies or notifications: {e}")
     
     def get_URL(self):
         return self.driver.current_url
