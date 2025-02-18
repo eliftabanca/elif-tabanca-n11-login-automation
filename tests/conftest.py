@@ -59,16 +59,6 @@ def setup(request):
     base_page = BasePage(driver)
 
 
-    try:
-        base_page.accept_cookies()
-    except Exception as e:
-        print(f"Cookies modal could not be closed: {e}")
-
-    try:
-        base_page.accept_notifications()
-    except Exception as e:
-        print(f"Notifications modal could not be closed: {e}")
-    
     request.cls.driver = driver
     request.cls.base_page = base_page
     request.cls.login_page = LoginPage(driver)
