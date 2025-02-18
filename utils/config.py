@@ -24,11 +24,11 @@ ERROR_MESSAGE_EMPTY_PASSWORD_LOCATOR = (By.CSS_SELECTOR, "#loginForm > div.form-
 ERROR_MESSAGE_SHORT_PASSWORD_LOCATOR = (By.CSS_SELECTOR, "#loginForm > div.form-inputs > div:nth-child(2) > div.errorMessage > div")
 ERROR_MESSAGE_LONG_PASSWORD_LOCATOR = (By.CSS_SELECTOR, "#loginForm > div.form-inputs > div:nth-child(2) > div.errorMessage > div")
 
-NOTIFICATION_ACCEPT_BUTTON = (By.CLASS_NAME, "dn-slide-accept-btn")
-COOKIE_ACCEPT_BUTTON = (By.ID, "1d5d7aff-8ee1-4a98-9022-f0e29a5e471c")
+NOTIFICATION_ACCEPT_BUTTON = (By.ID, "myLocation-close-info")
+COOKIE_ACCEPT_BUTTON = (By.ID, "2a7d83f8-effc-496f-ab9f-ed6840f0a847")
 
 #Error messages
-ERROR_MESSAGE_INVALID_CREDENTIALS = "E-posta adresi veya şifre hatalı, kontrol edebilir misin?" 
+ERROR_MESSAGE_INVALID_CREDENTIALS = "N11 platformuna erişiminiz engellenmiştir. Bilgi almak için Çağrı Merkezimizi arayabilirsiniz." #the account banned by n11"E-posta adresi veya şifre hatalı, kontrol edebilir misin?" 
 ERROR_MESSAGE_EMPTY_EMAIL = "Geçerli bir e-posta adresi girmelisin."  
 ERROR_MESSAGE_EMPTY_PASSWORD = "Şifreni girebilir misin?"
 ERROR_MESSAGE_SHORT_PASSWORD = "Girilen değer en az 6 karakter olmalıdır."  

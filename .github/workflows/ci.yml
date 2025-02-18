@@ -26,13 +26,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Chrome
+      - name: Install Chrome & ChromeDriver
         run: |
           sudo apt update
           sudo apt install -y google-chrome-stable
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+          CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+          sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+          chromedriver --version
 
       - name: Run Selenium Tests
-        run: pytest --maxfail=5 --disable-warnings --html=report.html --headless
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          pytest --maxfail=5 --disable-warnings --html=report.html --headless
 
       - name: Save Test Reports
         if: always()

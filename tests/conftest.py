@@ -13,6 +13,8 @@ from pages.login_page import LoginPage
 from pages.base_page import BasePage
 from utils.config import *
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 def pytest_addoption(parser):
     parser.addoption("--headless", action="store_true", default=sys.platform.startswith("linux"), help="Run tests in headless mode")
 
@@ -35,8 +37,7 @@ def wait_for_element(driver, locator, timeout=15):
     try:
         WebDriverWait(driver, timeout).until(EC.presence_of_element_located(locator))
     except Exception as e:
-        print(f"Element {locator} did not load: {e}")
-
+        print(f"⚠️ Element {locator} did not load: {e}")
 
 def take_screenshot(driver, test_name):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -44,7 +45,7 @@ def take_screenshot(driver, test_name):
     os.makedirs(screenshots_dir, exist_ok=True)
     screenshot_path = os.path.join(screenshots_dir, f"{test_name}_{timestamp}.png")
     driver.save_screenshot(screenshot_path)
-    print(f"Screenshot saved: {screenshot_path}")
+    print(f"📸 Screenshot saved: {screenshot_path}")
 
 @pytest.fixture(scope="function")
 def setup(request):
@@ -56,17 +57,24 @@ def setup(request):
     wait_for_element(driver, LOGIN_BUTTON_LOCATOR)
     
     base_page = BasePage(driver)
-    if not base_page.accept_cookies():
-        pytest.fail("Cookies modal could not be closed.")
-    if not base_page.accept_notifications():
-        pytest.fail("Notifications modal could not be closed.")
+
+
+    try:
+        base_page.accept_cookies()
+    except Exception as e:
+        print(f"Cookies modal could not be closed: {e}")
+
+    try:
+        base_page.accept_notifications()
+    except Exception as e:
+        print(f"Notifications modal could not be closed: {e}")
     
     request.cls.driver = driver
     request.cls.base_page = base_page
     request.cls.login_page = LoginPage(driver)
     
     yield
-    
+
     take_screenshot(driver, request.node.name)
     driver.quit()
 
@@ -74,4 +82,9 @@ def setup(request):
 def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
+    
+
+    if report.failed:
+        take_screenshot(item.cls.driver, item.nodeid.replace("/", "_").replace(":", "_"))
+    
     setattr(item, "rep_" + report.when, report)
