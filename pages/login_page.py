@@ -7,13 +7,13 @@ class LoginPage(BasePage):
 
     def __init__(self,driver):
         super().__init__(driver)
-        self.driver = driver
+
         self.email_field = EMAIL_INPUT
         self.password_field = PASSWORD_INPUT
         self.login_button = LOGIN_BUTTON_LOCATOR
     
     def valid_login(self):
-        self.wait_element_visibility(EMAIL_INPUT).click
+        self.wait_element_visibility(EMAIL_INPUT).click()
         self.wait_element_visibility(EMAIL_INPUT).send_keys(VALID_USER_EMAIL)
         self.wait_element_visibility(PASSWORD_INPUT).send_keys(VALID_USER_PASSWORD)
         self.wait_element_clickable(LOGIN_BUTTON_LOCATOR).click()

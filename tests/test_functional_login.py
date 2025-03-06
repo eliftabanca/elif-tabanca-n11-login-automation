@@ -1,4 +1,3 @@
-import time
 import pytest
 import softest
 from pages.login_page import LoginPage

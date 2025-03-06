@@ -28,7 +28,7 @@ NOTIFICATION_ACCEPT_BUTTON = (By.ID, "myLocation-close-info")
 COOKIE_ACCEPT_BUTTON = (By.ID, "2a7d83f8-effc-496f-ab9f-ed6840f0a847")
 
 #Error messages
-ERROR_MESSAGE_INVALID_CREDENTIALS = "N11 platformuna erişiminiz engellenmiştir. Bilgi almak için Çağrı Merkezimizi arayabilirsiniz." #the account banned by n11"E-posta adresi veya şifre hatalı, kontrol edebilir misin?" 
+ERROR_MESSAGE_INVALID_CREDENTIALS = "E-posta adresi veya şifre hatalı, kontrol edebilir misin?"   #the account banned by n11 "N11 platformuna erişiminiz engellenmiştir. Bilgi almak için Çağrı Merkezimizi arayabilirsiniz."
 ERROR_MESSAGE_EMPTY_EMAIL = "Geçerli bir e-posta adresi girmelisin."  
 ERROR_MESSAGE_EMPTY_PASSWORD = "Şifreni girebilir misin?"
 ERROR_MESSAGE_SHORT_PASSWORD = "Girilen değer en az 6 karakter olmalıdır."  
