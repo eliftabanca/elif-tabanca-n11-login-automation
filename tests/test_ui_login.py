@@ -16,7 +16,7 @@ class TestResponsiveLoginUI(softest.TestCase):
         self.assertTrue(40 <= email_size['height'] <= 50, "Email field height is not as expected for iPhone SE")
         self.assertTrue(email_location['y'] > 100, "Email field Y position is not as expected for iPhone SE")
 
-        print("✅ Mobile UI test passed for iPhone SE.")
+        print("Mobile UI test passed for iPhone SE.")
 
     def test_tablet_ui_elements(self):
         self.driver.set_window_size(768, 1024)
@@ -29,4 +29,4 @@ class TestResponsiveLoginUI(softest.TestCase):
         self.assertTrue(40 <= email_size['height'] <= 50, "Email field height is not as expected for iPad Mini")
         self.assertTrue(email_location['y'] > 100, "Email field Y position is not as expected for iPad Mini")
 
-        print("✅ Tablet UI test passed for iPad Mini.")
+        print("Tablet UI test passed for iPad Mini.")
